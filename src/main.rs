@@ -113,12 +113,9 @@ async fn connect_and_login(config: &config::Telegram) -> Result<Client, Whatever
             }
         }
 
-        if let Some(session_storage) = &config.session_storage {
+        if config.session_storage.is_some() {
             info!("Signed in, saving session");
-            client
-                .session()
-                .save_to_file(session_storage)
-                .whatever_context("Saving session")?;
+            save_session(&client, config)?;
         } else {
             warn!("Signed in, but no session storage configured. This will leave dangling sessions on restarts!");
         }
@@ -343,9 +340,7 @@ async fn handle_updates(mut tg: Client) -> Result<(), Whatever> {
 fn save_session(client: &Client, config: &config::Telegram) -> Result<(), Whatever> {
     if let Some(session_storage) = &config.session_storage {
         debug!("Saving session to {}", session_storage);
-        client
-            .session()
-            .save_to_file(session_storage)
+        std::fs::write(session_storage, client.session().save())
             .whatever_context("Saving session")?;
     }
 
