@@ -25,3 +25,8 @@ opentelemetry = { version = "0.20.0", features = ["rt-tokio"] }
 opentelemetry-otlp = "0.13.0"
 tracing-opentelemetry = "0.21.0"
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
+
+[profile.ship]
+inherits = "release"
+debug = 0
+lto = 'thin'
