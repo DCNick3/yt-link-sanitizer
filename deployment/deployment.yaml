@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yt-link-sanitizer
+  labels:
+    app: yt-link-sanitizer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yt-link-sanitizer
+  template:
+    metadata:
+      labels:
+        app: yt-link-sanitizer
+      annotations:
+        instrumentation.opentelemetry.io/inject-sdk: "true"
+    spec:
+      volumes:
+        - name: yt-link-sanitizer-data
+          persistentVolumeClaim:
+            claimName: yt-link-sanitizer-pvc
+      containers:
+        - name: batts-backend
+          image: ghcr.io/dcnick3/yt-link-sanitizer:ref-620c71bfb2fd9b32fa1c2f7f7116157abfd244d8
+          volumeMounts:
+            - mountPath: /data
+              name: yt-link-sanitizer-data
+          env:
+            - name: CONFIG_TELEGRAM__ACCOUNT__TYPE
+              value: PreparedSession
+            - name: CONFIG_TELEGRAM__ACCOUNT__SESSION
+              valueFrom:
+                secretKeyRef:
+                  name: yt-link-sanitizer-secrets
+                  key: telegram_account_session
+
+            - name: CONFIG_TELEGRAM__API_ID
+              valueFrom:
+                secretKeyRef:
+                  name: yt-link-sanitizer-secrets
+                  key: telegram_api_id
+            - name: CONFIG_TELEGRAM__API_HASH
+              valueFrom:
+                secretKeyRef:
+                  name: yt-link-sanitizer-secrets
+                  key: telegram_api_hash
