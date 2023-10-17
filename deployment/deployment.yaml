@@ -21,8 +21,8 @@ spec:
           persistentVolumeClaim:
             claimName: yt-link-sanitizer-pvc
       containers:
-        - name: batts-backend
-          image: ghcr.io/dcnick3/yt-link-sanitizer:ref-620c71bfb2fd9b32fa1c2f7f7116157abfd244d8
+        - name: yt-link-sanitizer
+          image: ghcr.io/dcnick3/yt-link-sanitizer:ref-a2a82022fc442f6705ecc5d08172e01ca402f426
           volumeMounts:
             - mountPath: /data
               name: yt-link-sanitizer-data
