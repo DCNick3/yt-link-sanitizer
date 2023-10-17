@@ -1,0 +1,5 @@
+/target
+.idea
+*.local.yaml
+tgbot.session
+tguser.session

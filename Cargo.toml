@@ -1,0 +1,27 @@
+[package]
+name = "yt-link-sanitizer"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+grammers-client = { git = "https://github.com/DCNick3/grammers", rev = "8228baed7ff4d0500b73c7d92d121b40806c3beb" }
+grammers-session = { git = "https://github.com/DCNick3/grammers", rev = "8228baed7ff4d0500b73c7d92d121b40806c3beb"}
+grammers-tl-types = { git = "https://github.com/DCNick3/grammers", rev = "8228baed7ff4d0500b73c7d92d121b40806c3beb" }
+
+url = "2.4.1"
+
+tokio = { version = "1.32.0", features = ["macros", "rt", "rt-multi-thread", "signal"] }
+
+
+serde = "1.0.188"
+hex-serde = "0.1.0"
+config = "0.13.3"
+snafu = "0.7.5"
+
+tracing = "0.1.37"
+opentelemetry = { version = "0.20.0", features = ["rt-tokio"] }
+opentelemetry-otlp = "0.13.0"
+tracing-opentelemetry = "0.21.0"
+tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
