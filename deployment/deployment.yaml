@@ -22,7 +22,7 @@ spec:
             claimName: yt-link-sanitizer-pvc
       containers:
         - name: yt-link-sanitizer
-          image: ghcr.io/dcnick3/yt-link-sanitizer:ref-a2a82022fc442f6705ecc5d08172e01ca402f426
+          image: ghcr.io/dcnick3/yt-link-sanitizer:ref-30a8e78b7b17d95c4e68bcde02553e463e5c414b
           volumeMounts:
             - mountPath: /data
               name: yt-link-sanitizer-data
