@@ -1,2 +1,2 @@
 telegram:
-  session_storage: "data/tguser.session"
+  session_storage: "/data/tguser.session"
